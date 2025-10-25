@@ -14,7 +14,124 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      analysis_results: {
+        Row: {
+          confidence: number
+          created_at: string | null
+          feedback_improvements: string[] | null
+          feedback_next_steps: string[] | null
+          feedback_strengths: string[] | null
+          form_breakdown: Json | null
+          form_score: number
+          id: string
+          rep_count: number
+          video_id: string
+        }
+        Insert: {
+          confidence: number
+          created_at?: string | null
+          feedback_improvements?: string[] | null
+          feedback_next_steps?: string[] | null
+          feedback_strengths?: string[] | null
+          form_breakdown?: Json | null
+          form_score: number
+          id?: string
+          rep_count: number
+          video_id: string
+        }
+        Update: {
+          confidence?: number
+          created_at?: string | null
+          feedback_improvements?: string[] | null
+          feedback_next_steps?: string[] | null
+          feedback_strengths?: string[] | null
+          form_breakdown?: Json | null
+          form_score?: number
+          id?: string
+          rep_count?: number
+          video_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "analysis_results_video_id_fkey"
+            columns: ["video_id"]
+            isOneToOne: false
+            referencedRelation: "videos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      human_reviews: {
+        Row: {
+          ai_rep_count: number
+          corrected_rep_count: number | null
+          created_at: string | null
+          id: string
+          reviewed_at: string | null
+          reviewer_notes: string | null
+          status: string
+          video_id: string
+        }
+        Insert: {
+          ai_rep_count: number
+          corrected_rep_count?: number | null
+          created_at?: string | null
+          id?: string
+          reviewed_at?: string | null
+          reviewer_notes?: string | null
+          status?: string
+          video_id: string
+        }
+        Update: {
+          ai_rep_count?: number
+          corrected_rep_count?: number | null
+          created_at?: string | null
+          id?: string
+          reviewed_at?: string | null
+          reviewer_notes?: string | null
+          status?: string
+          video_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "human_reviews_video_id_fkey"
+            columns: ["video_id"]
+            isOneToOne: false
+            referencedRelation: "videos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      videos: {
+        Row: {
+          created_at: string | null
+          exercise: string
+          id: string
+          name: string
+          status: string
+          updated_at: string | null
+          video_url: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          exercise: string
+          id?: string
+          name: string
+          status?: string
+          updated_at?: string | null
+          video_url?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          exercise?: string
+          id?: string
+          name?: string
+          status?: string
+          updated_at?: string | null
+          video_url?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
